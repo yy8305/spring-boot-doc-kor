@@ -80,7 +80,7 @@ Spring Boot 및 Maven 시작에 대한 자세한 내용은 Maven 플러그인 �
 
 - spring-boot-starter-parent 의 pom.xml 예제  
 
-    ```
+    ```xml
     # 일반적인 spring-boot-stater-parent 선언방법
     <!-- Inherit defaults from Spring Boot -->
     <parent>
@@ -104,7 +104,7 @@ Spring Boot 및 Maven 시작에 대한 자세한 내용은 Maven 플러그인 �
     </dependencyManagement>
     ```
 
-### 3.1.2. Gradle 설치
+#### 3.1.2. Gradle 설치
 
 Spring Boot는 Gradle 6 (6.3 이상)과 호환됩니다. Gradle 5.6.x도 지원되지만이 지원은 더 이상 사용되지 않으며 향후 릴리스에서 제거됩니다. 아직 Gradle이 설치되어 있지 않은 경우 gradle.org 의 지침을 따를 수 있습니다.  
 
@@ -113,13 +113,13 @@ Spring Boot 종속성은 `org.springframework.boot`를 `group`으로 사용합�
 > Gradle Wrapper  
 Gradle Wrapper는 프로젝트를 빌드해야 할 때 Gradle을 "획득(obtaining)" 하는 좋은 방법을 제공합니다. 빌드 프로세스를 부트 스트랩하기 위해 코드와 함께 커밋하는 작은 스크립트 및 라이브러리입니다. 자세한 내용은 docs.gradle.org/current/userguide/gradle_wrapper.html 을 참조하십시오.
 
-## 3.2. Spring Boot CLI 설치
+### 3.2. Spring Boot CLI 설치
 
 Spring Boot CLI (Command Line Interface)는 Spring으로 빠르게 프로토 타입을 만드는 데 사용할 수있는 명령줄 도구입니다. 이를 통해 Groovy 스크립트를 실행할 수 있습니다. 즉, 많은 상용구 코드없이 익숙한 Java와 유사한 구문을 사용할 수 있습니다.  
 
 Spring Boot로 작업하기 위해 CLI를 사용할 필요는 없지만 Spring 애플리케이션을 시작하는 가장 빠른 방법입니다.
 
-### 3.2.1. 수동 설치 
+#### 3.2.1. 수동 설치 
 
 Spring 소프트웨어 저장소에서 Spring CLI 배포를 다운로드 할 수 있습니다.
 
@@ -129,7 +129,134 @@ Spring 소프트웨어 저장소에서 Spring CLI 배포를 다운로드 할 수
 
 [스냅샷](https://repo.spring.io/snapshot/org/springframework/boot/spring-boot-cli/)으로도 사용할 수 있습니다.
 
-다운로드가 완료되면 압축을 푼 아카이브의 [INSTALL.txt](https://raw.githubusercontent.com/spring-projects/spring-boot/v2.4.5/spring-boot-project/spring-boot-cli/src/main/content/INSTALL.txt) 지침을 따릅니다. 요약 하면 파일 의 디렉토리에 spring스크립트 (spring.bat Windows용) bin/가 .zip 있습니다. 또는 파일 java -jar과 함께 사용할 수 있습니다. jar(스크립트는 클래스 경로가 올바르게 설정되었는지 확인하는 데 도움이됩니다).
+다운로드가 완료되면 압축을 푼 아카이브의 [INSTALL.txt](https://raw.githubusercontent.com/spring-projects/spring-boot/v2.4.5/spring-boot-project/spring-boot-cli/src/main/content/INSTALL.txt) 지침을 따르세요. 요약 하면 .zip 파일 안에 bin/ 디렉토리 안에 spring script(spring.bat for Windows) 가 있습니다. 또는 `java -jar` 와 함께 `.jar 파일`(스크립트는 classpath가 올바르게 설정되었는지 확인하는 데 도움이됩니다)을 사용할 수 있습니다.
+
+#### 3.2.2. SDKMAN으로 설치
+SDKMAN(소프트웨어 개발 키트 관리자)는 Groovy 및 Spring Boot CLI를 포함하여 다양한 바이너리 SDK의 여러 버전을 관리하는데 사용할 수 있습니다. SDKMAN을 sdkman.io 에서 받고나면 다음과 같은 명령을 사용하여 spring boot를 설치합니다.
+```
+$ sdk install springboot 
+$ spring --version 
+springboot v2.4.5
+```  
+
+CLI 용 기능을 개발하고 빌드 한 버전에 액세스하려면 다음 명령을 사용하십시오.
+```
+$ sdk install springboot dev /path/to/spring-boot/spring-boot-cli/target/spring-boot-cli-2.4.5-bin/spring-2.4.5/ 
+$ sdk default springboot dev 
+$ spring --version 
+Spring CLI v2.4.5
+```
+
+앞의 지침 spring은 dev인스턴스 라는 로컬 인스턴스를 설치 합니다. 대상 빌드 위치를 가르키므로 Spring Boot를 다시 빌드 할 때마다 spring최신 상태입니다.
+
+다음 명령을 실행하여 확인할 수 있습니다.
+
+```
+$ sdk ls springboot
+
+================================================================================
+Available Springboot Versions
+================================================================================
+> + dev
+* 2.4.5
+
+================================================================================
++ - local version
+* - installed
+> - currently in use
+================================================================================
+```
+
+#### 3.2.3. OSX Homebrew 설치
+
+Mac에서 Homebrew 를 사용하는 경우 다음 명령을 사용하여 Spring Boot CLI를 설치할 수 있습니다.
+
+```
+$ brew tap spring-io / tap 
+$ brew install spring-boot
+```
+
+Homebrew는 /usr/local/bin에 spring을 설치합니다.
+
+> formula(버전?)이 보이지 않으면 Brew 설치가 오래된 것일 수 있습니다. 이 경우 실행 brew update하고 다시 시도하십시오.
+
+#### 3.2.4. MacPorts 설치
+
+Mac에서 MacPorts 를 사용하는 경우 다음 명령을 사용하여 Spring Boot CLI를 설치할 수 있습니다.
+
+```
+$ sudo port install spring-boot-cli
+```
+
+#### 3.2.5 Command-line 자동완성
+
+Spring Boot CLI에는 BASH 및 zsh 셸에 대한 Command-line 자동완성 기능을 제공하는 스크립트가 포함되어 있습니다. 당신은 어떤 쉘 이나 개인 또는 시스템 전체 bash 쉘에서 source script (spring으로 명명 된 스크립트)를 초기화에 넣어 사용할수 있습니다. Debian 시스템에서는 시스템 전체 스크립트가 /shell-completion/bash있으며 해당 디렉토리의 모든 스크립트는 새 셸이 시작될 때 실행됩니다. 예를 들어 SDKMAN!을 사용하여 설치 한 경우 스크립트를 수동으로 실행하려면 다음 명령을 사용하십시오.
+
+```
+$ . ~/.sdkman/candidates/springboot/current/shell-completion/bash/spring
+$ spring <HIT TAB HERE>
+  grab  help  jar  run  test  version
+```
+> Homebrew 또는 MacPorts를 사용하여 Spring Boot CLI를 설치하면 명령 줄 완료 스크립트가 자동으로 셸에 등록됩니다.
+
+#### 3.2.6. Windows Scoop 설치
+
+Windows에서 Scoop 을 사용하는 경우 다음 명령을 사용하여 Spring Boot CLI를 설치할 수 있습니다.
+
+```
+> scoop bucket add extras
+> scoop install springboot
+```
+
+
+#### 3.2.7. 빠른 시작 Spring CLI 예제
+
+다음 웹 애플리케이션을 사용하여 설치를 테스트 할 수 있습니다. 시작하려면 app.groovy 다음과 같이 파일을 만듭니다.
+
+```java
+@RestController
+class ThisWillActuallyRun {
+
+    @RequestMapping("/")
+    String home() {
+        "Hello World!"
+    }
+
+}
+```
+
+그런 다음 다음과 같이 셸에서 실행합니다.
+
+```
+$ spring run app.groovy
+```
+
+> 애플리케이션의 첫 번째 실행은 종속성이 다운로드되므로 느립니다. 후속 실행은 훨씬 더 빠릅니다.
+
+localhost:8080 주소를 자주 사용하는 웹 브라우저에서 엽니다. 다음 출력이 표시되어야합니다.
+
+```
+Hello World!
+```
+
+### 3.3. 이전 버전의 Spring Boot에서 업그레이드
+
+1.x Spring Boot 릴리스에서 업그레이드하는 경우 자세한 업그레이드 지침은 spring 프로젝트 위키의 "마이그레이션 가이드"를 확인하십시오. 각 릴리스의 "새롭고 주목할만한" 기능 목록은 "[릴리스 노트](https://github.com/spring-projects/spring-boot/wiki)" 에서 확인하십시오.
+
+새 기능 릴리스로 업그레이드 할 때 일부 속성의 이름이 변경되거나 제거되었을 수 있습니다. Spring Boot는 애플리케이션의 환경을 분석하고 시작시 진단을 출력하는 방법을 제공하지만 런타임에 속성을 임시로 마이그레이션 할 수도 있습니다. 해당 기능을 사용하려면 프로젝트에 다음 종속성을 추가하십시오.
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-properties-migrator</artifactId>
+    <scope>runtime</scope>
+</dependency>
+```
+> 마이그레이션이 완료되면 프로젝트의 종속성에서이 모듈을 제거해야합니다.
+
+기존 CLI 설치를 업그레이드하려면 적절한 패키지 관리자 명령(예 : brew upgrade)을 사용하십시오. CLI를 수동으로 설치 한 경우 표준 지침을 따르고 PATH환경 변수를 업데이트하여 이전 참조를 제거하십시오.
+
+## 4. 첫 번째 스프링 부트 애플리케이션 개발
 
 # Reference
 - https://docs.spring.io/spring-boot/docs/current/reference/html/getting-started.html#getting-started
