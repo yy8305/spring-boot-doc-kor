@@ -19,7 +19,7 @@ Spring Boot를 사용하여 `java -jar` 또는 `war 패키징`를 통해 Java �
 - 대규모 프로젝트 클래스 (예 : 임베디드 서버, 보안, 메트릭, 상태 확인 및 외부 구성)에 공통적 인 다양한 비 기능적 기능을 제공합니다.
 
 - 코드 생성(code generation)이 전혀없고 XML 설정이 필요하지 않습니다.
-    > code generation -> ruby on rails의 skeleton 같은 기술
+    > code generation ex) ruby on rails, django
 
 ---
 
@@ -257,6 +257,78 @@ Hello World!
 기존 CLI 설치를 업그레이드하려면 적절한 패키지 관리자 명령(예 : brew upgrade)을 사용하십시오. CLI를 수동으로 설치 한 경우 표준 지침을 따르고 PATH환경 변수를 업데이트하여 이전 참조를 제거하십시오.
 
 ## 4. 첫 번째 스프링 부트 애플리케이션 개발
+
+이 섹션에서는 “Hello World!” 프로그램을 개발하는 방법에 대해 설명합니다. Spring Boot의 주요 기능 중 일부를 강조하는 웹 애플리케이션입니다. 대부분의 IDE에서 지원하므로 Maven을 사용하여 해당 프로젝트를 빌드합니다.
+
+> [spring.io](https://spring.io) 에서는 "Getting stated"를 포함한 많은 가이드에서 Spring boot를 사용합니다. 특정 문제를 해결해야하는 경우 먼저 확인하십시오.
+
+> start.spring.io 로 이동하여 종속성 검색기에서 "Web" Starter를 선택하여 아래 단계를 단축 할 수 있습니다. 이렇게하면 새 프로젝트 구조가 생성되어 즉시 코딩 을 시작할 수 있습니다. 자세한 내용은 Spring Initializr 문서 를 확인하십시오.
+
+시작하기 전에 터미널을 열고 다음 명령을 실행하여 유효한 Java 및 Maven 버전이 설치되어 있는지 확인하십시오.
+
+```
+$ java -version
+java version "1.8.0_102"
+Java(TM) SE Runtime Environment (build 1.8.0_102-b14)
+Java HotSpot(TM) 64-Bit Server VM (build 25.102-b14, mixed mode)
+```
+
+```
+$ mvn -v
+Apache Maven 3.5.4 (1edded0938998edf8bf061f1ceb3cfdeccf443fe; 2018-06-17T14:33:14-04:00)
+Maven home: /usr/local/Cellar/maven/3.3.9/libexec
+Java version: 1.8.0_102, vendor: Oracle Corporation
+```
+
+> 이 샘플은 자체 디렉토리에 만들어야합니다. 후속 지침에서는 적합한 디렉토리를 작성했으며 현재 디렉토리라고 가정합니다.
+
+### 4.1. POM 생성
+먼저 Maven pom.xml 파일을 만들어야 합니다.   
+pom.xml은 프로젝트를 빌드하는 데 사용되는 방법이다. 좋아하는 텍스트 편집기를 열고 다음을 추가하십시오.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example</groupId>
+    <artifactId>myproject</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.4.5</version>
+    </parent>
+
+    <description/>
+    <developers>
+        <developer/>
+    </developers>
+    <licenses>
+        <license/>
+    </licenses>
+    <scm>
+        <url/>
+    </scm>
+    <url/>
+
+    <!-- Additional lines to be added here... -->
+
+</project>
+```
+
+이전 목록은 작동하는 빌드를 제공해야합니다.   
+`mvn package` 명령어를 실행하여 테스트 할 수 있습니다. ("jar will be empty - no content was marked for inclusion!" 지금은 해당 경고를 무시할 수 있습니다.)
+
+> 이 시점에서 프로젝트를 IDE로 가져올 수 있습니다. (대부분의 최신 Java IDE에는 Maven에 대한 기본 지원이 포함됩니다.) 간단하게 하기 위해 이 예제에서는 일반 텍스트 편집기를 계속 사용합니다.
+
+### 4.2. 클래스 경로 종속성 추가
+
+Spring Boot는 클래스 경로에 jar를 추가 할 수있는 여러 "스타터"를 제공합니다. smoke 테스트에 대한 우리의 응용 프로그램은 POM 섹션 spring-boot-starter-parent에서 사용합니다 parent. 는 spring-boot-starter-parent유용 메이븐 기본값을 제공하는 특별 선발한다. 또한 "축복 된" 종속성에 대한 태그를 dependency-management 생략 할 수 있는 섹션 도 제공합니다 version.
+
+
 
 # Reference
 - https://docs.spring.io/spring-boot/docs/current/reference/html/getting-started.html#getting-started
