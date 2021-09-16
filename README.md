@@ -1,6 +1,6 @@
-# Overview
+# Introduction
 
-Spring Boot 2.4.5 공식 문서를 참고하여 한국어로 정리하였습니다.  
+Spring Boot 2.5.4 공식 문서를 참고하여 한국어로 정리하였습니다.  
 오로지 저의 공부 목적으로만 정리한 것이며 오타나 오역이 있을 수 있습니다.  
 
 # Reference
