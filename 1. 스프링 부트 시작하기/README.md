@@ -257,11 +257,11 @@ Hello World!
 
 ## 4. 첫 번째 스프링 부트 애플리케이션 개발
 
-이 섹션에서는 “Hello World!” 프로그램을 개발하는 방법에 대해 설명합니다. Spring Boot의 주요 기능 중 일부를 강조하는 웹 애플리케이션입니다. 대부분의 IDE에서 지원하므로 Maven을 사용하여 해당 프로젝트를 빌드합니다.
+이 섹션에서는 스프링 부트의 주요 기능 중 일부를 강조하는 소규모 "Hello World!" 웹 응용 프로그램을 개발하는 방법에 대해 설명합니다. 대부분의 IDE에서 Maven을 지원하므로 Maven을 사용하여 해당 프로젝트를 구축합니다.
 
 > [spring.io](https://spring.io) 에서는 "Getting stated"를 포함한 많은 가이드에서 Spring boot를 사용합니다. 특정 문제를 해결해야하는 경우 먼저 확인하십시오.
 
-> start.spring.io 로 이동하여 종속성 검색기에서 "Web" Starter를 선택하여 아래 단계를 단축 할 수 있습니다. 이렇게하면 새 프로젝트 구조가 생성되어 즉시 코딩 을 시작할 수 있습니다. 자세한 내용은 Spring Initializr 문서 를 확인하십시오.
+> start.spring.io 로 이동하여 종속성 검색기에서 "Web" Starter를 선택하여 아래 단계를 단축 할 수 있습니다. 이렇게하면 새 프로젝트 구조가 생성되어 즉시 코딩을 시작할 수 있습니다. 자세한 내용은 [Spring Initializr](https://docs.spring.io/initializr/docs/current/reference/html/#user-guide) 문서 를 확인하십시오.
 
 시작하기 전에 터미널을 열고 다음 명령을 실행하여 유효한 Java 및 Maven 버전이 설치되어 있는지 확인하십시오.
 
